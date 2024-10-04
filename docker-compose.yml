@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  template_backend_jwt_php:
+    container_name: template_backend_jwt_php
+    build: ./docker/php
+    volumes:
+      - .:/srv:rw
+    restart: always
+    networks:
+      - template_backend_jwt_network
+
+  template_backend_jwt_nginx:
+    container_name: template_backend_jwt_nginx
+    image: nginx:1.26.0
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./public:/srv/public:ro
+    ports:
+      - "8222:80"
+    restart: always
+    networks:
+      - template_backend_jwt_network
+    depends_on:
+      - template_backend_jwt_php
+
+  template_backend_jwt_db:
+    container_name: "template_backend_jwt_db"
+    image: mariadb:10.5.18
+    ports:
+      - "3336:3306"
+    volumes:
+      - template_backend_jwt_db:/var/lib/mysql:rw
+    networks:
+      - template_backend_jwt_network
+    environment:
+      MYSQL_USER: template
+      MYSQL_PASSWORD: secret
+      MYSQL_DATABASE: backend
+      MYSQL_ROOT_PASSWORD: root
+
+networks:
+  template_backend_jwt_network:
+volumes:
+  template_backend_jwt_db:
