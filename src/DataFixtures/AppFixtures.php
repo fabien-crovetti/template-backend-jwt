@@ -37,6 +37,7 @@ class AppFixtures extends Fixture
         $author2->setName('Terry Goodkind');
         $manager->persist($author2);
 
+
         $book1 = new Book();
         $book1->setTitle('The Sword of Truth');
         $book1->setReleaseDate(new \DateTime('1994-01-01'));
@@ -50,16 +51,40 @@ class AppFixtures extends Fixture
         $manager->persist($book2);
 
         $book3 = new Book();
-        $book3->setTitle('The Gunslinger');
-        $book3->setReleaseDate(new \DateTime('1984-01-01'));
-        $book3->setAuthor($author1);
+        $book3->setTitle('Blood of the Fold');
+        $book3->setReleaseDate(new \DateTime('1996-01-01'));
+        $book3->setAuthor($author2);
         $manager->persist($book3);
 
         $book4 = new Book();
-        $book4->setTitle('The Drawing of the Three');
-        $book4->setReleaseDate(new \DateTime('1987-01-01'));
-        $book4->setAuthor($author1);
+        $book4->setTitle('Temple of the Winds');
+        $book4->setReleaseDate(new \DateTime('1997-01-01'));
+        $book4->setAuthor($author2);
         $manager->persist($book4);
+
+        $book5 = new Book();
+        $book5->setTitle('The Gunslinger');
+        $book5->setReleaseDate(new \DateTime('1984-01-01'));
+        $book5->setAuthor($author1);
+        $manager->persist($book5);
+
+        $book6 = new Book();
+        $book6->setTitle('The Drawing of the Three');
+        $book6->setReleaseDate(new \DateTime('1987-01-01'));
+        $book6->setAuthor($author1);
+        $manager->persist($book6);
+
+        $book7 = new Book();
+        $book7->setTitle('The Waste Lands');
+        $book7->setReleaseDate(new \DateTime('1991-01-01'));
+        $book7->setAuthor($author1);
+        $manager->persist($book7);
+
+        $book8 = new Book();
+        $book8->setTitle('Wizard and Glass');
+        $book8->setReleaseDate(new \DateTime('1997-01-01'));
+        $book8->setAuthor($author1);
+        $manager->persist($book8);
 
 
 

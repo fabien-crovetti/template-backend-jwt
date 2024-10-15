@@ -25,3 +25,12 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN  mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 
 WORKDIR /srv
+
+COPY docker-entrypoint.sh /docker-entrypoint
+
+RUN chmod 755 /docker-entrypoint
+
+
+ENTRYPOINT ["/docker-entrypoint"]
+
+CMD ["php-fpm", "-R"]
