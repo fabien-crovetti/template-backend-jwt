@@ -19,14 +19,17 @@ Quick start for Symfony backend project with JWT authentication
 ### Run docker :
 ``docker compose up --build``
 
-### Create data tables:
+### Enter the docker container :
+``docker exec -it template_backend_jwt_php bash``
+
+### Create data tables :
 ``./bin/console doctrine:migrations:migrate``
 
 ### Load fixtures :
 ``./bin/console doctrine:fixtures:load``
 
-
-## Usage
+### Generate JWT keypair :
+``./bin/console lexik:jwt:generate-keypair``
 
 ### Create user command :
 ``./bin/console app:create-user userEmail userPassword``
@@ -34,7 +37,20 @@ Quick start for Symfony backend project with JWT authentication
 ### Générate JWT TOKEN :
 ``curl -X POST -H "Content-Type: application/json" http://localhost:8222/api/login_check -d '{"username":"userEmail","password":"userPassword"}'``
 
-### Use TOKEN  :
+
+## Usage
+
+> All route in ``/api`` endpoint are protected with authentication.
+>
+> Others routes can be used without authentication.
+
+### Get no auth route content :
+``curl -X GET -H "Content-Type: application/json" http://localhost:8222/time``
+
+
+### Use TOKEN to get protected route content :
 add :
 ``Authorization: Bearer {jwtToken}``
 on header request
+
+``curl -X GET -H "Content-Type: application/json" http://localhost:8222/api/user -H "Authorization: Bearer {token}"``
